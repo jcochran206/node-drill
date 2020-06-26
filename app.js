@@ -78,7 +78,9 @@ if( !numbers ||
     numbers.some(n => n > 20) || 
     numbers.some(n => n < 0)
   ) { 
-  res.status(400).send('Please provide 6 distinct numbers between 1 and 20');
+  return res
+    .status(400)
+    .send('Please provide 6 distinct numbers between 1 and 20');
   }
 
     //generate random 
