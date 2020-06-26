@@ -38,6 +38,58 @@ app.get('/sum', (req, res) => {
    
 });
 
+// cipher
+app.get('/cipher', (req, res) => {
+    const text = req.query.text;
+    const shift = req.query.shift;
+    const limit = {a: 97, z: 122};
+
+    if(!text){
+        res.status(400).send('please provide query params for text')
+    }
+
+    if(!shift){
+        res.status(400).send('please provide query params for shift')
+    }
+
+    if(isNaN(+shift)){
+        res.status(400).send('please provide a number');
+    }
+
+    const crypt = text.toLowerCase().split('').map(char => {
+        const charIndex = char.charCodeAt(0) + +shift;
+
+        if(charIndex > limit.z){
+            return String.fromCharCode((charIndex - limit.z) + (limit.a - 1))
+        }
+
+        return String.fromCharCode(charIndex);
+    });
+
+    res.send(crypt.join(''));
+});
+//lotto
+app.get('/lotto', (req, res) => {
+    //constants 
+    const numbers = req.query.numbers;
+
+if( !numbers || 
+    numbers.length !== 6 || 
+    numbers.some(n => n > 20) || 
+    numbers.some(n => n < 0) ) 
+{ 
+    res.status(400).send('Please provide 6 distinct numbers between 1 and 20'); 
+}
+
+    //generate random 
+    let arr = [];
+    for(i = 0; i < 6; i++){
+        let randoNum = Math.floor(Math.random() * 20);
+    }
+
+
+    res.send('lotto path')
+});
 
 app.listen(port, () => {
     console.log('Express server is listening on port 8080')
