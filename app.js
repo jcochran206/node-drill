@@ -71,24 +71,43 @@ app.get('/cipher', (req, res) => {
 //lotto
 app.get('/lotto', (req, res) => {
     //constants 
-    const numbers = req.query.numbers;
+    const numbers = req.query.n;
 
 if( !numbers || 
     numbers.length !== 6 || 
     numbers.some(n => n > 20) || 
-    numbers.some(n => n < 0) ) 
-{ 
-    res.status(400).send('Please provide 6 distinct numbers between 1 and 20'); 
-}
+    numbers.some(n => n < 0)
+  ) { 
+  res.status(400).send('Please provide 6 distinct numbers between 1 and 20');
+  }
 
     //generate random 
     let arr = [];
     for(i = 0; i < 6; i++){
         let randoNum = Math.floor(Math.random() * 20);
+        let match = numbers.find(num => +num === randoNum);
+
+        if (match !== undefined) {
+          arr.push(match);
+        }
+    }
+
+    if(arr.length < 4) {
+      return res.send(`Sorry you lose! ${arr}`)
+    }
+    if(arr.length === 4) {
+      return res.send(`Congratulations you win a free ticket ${arr}`)
+    }
+    if(arr.length === 5) {
+      return res.send(`Congratulations you win $100 ${arr}`);
+    }
+    if(arr.length === 6) {
+      return res.send(`Wow! Unbelievable! You could have won the mega millions! ${arr}`);
     }
 
 
-    res.send('lotto path')
+    // res.send('lotto path')
+    // res.json(arr);
 });
 
 app.listen(port, () => {
