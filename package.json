@@ -1,0 +1,28 @@
+{
+  "name": "node-drills",
+  "version": "1.0.0",
+  "description": "node drills",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jcochran206/node-drills.git"
+  },
+  "author": "Jon and Nate",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jcochran206/node-drills/issues"
+  },
+  "homepage": "https://github.com/jcochran206/node-drills#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "morgan": "^1.10.0"
+  }
+}
